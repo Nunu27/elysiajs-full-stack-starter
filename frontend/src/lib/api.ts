@@ -1,5 +1,5 @@
 import { treaty } from '@elysiajs/eden';
-import type { App } from 'vlab-backend/server';
+import type { App } from 'app-backend/server';
 
 const client = treaty<App>(window.location.origin);
 export default client.api;

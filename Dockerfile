@@ -59,4 +59,4 @@ COPY --from=frontend-builder /app/build/ .
 
 EXPOSE 3000
 
-ENTRYPOINT ["/app/vlab"]
+ENTRYPOINT ["/app/server"]

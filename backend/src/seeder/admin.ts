@@ -10,7 +10,7 @@ export default {
 			.insert(users)
 			.values({
 				name: "Admin",
-				email: "admin@vlab.pens.ac.id",
+				email: "admin@example.com",
 				passwordHash: await Bun.password.hash("admin123"),
 				role: "admin"
 			})

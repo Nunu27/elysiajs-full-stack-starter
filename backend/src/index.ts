@@ -13,7 +13,7 @@ if (command === "seed") {
 		logger.error({ error }, "Seeding failed");
 		process.exit(1);
 	}
-} else if (command && !command.endsWith("vlab")) {
+} else if (command && !command.endsWith("server")) {
 	logger.error(`Unknown command: ${command}`);
 	logger.info("Available commands: seed");
 	process.exit(1);

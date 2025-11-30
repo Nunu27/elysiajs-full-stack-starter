@@ -15,7 +15,7 @@ A full-stack starter template built with [ElysiaJS](https://elysiajs.com/), [Bun
 ### 1. Clone the repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Nunu27/elysiajs-full-stack-starter.git
 cd elysiajs-full-stack-starter
 ```
 
