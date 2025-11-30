@@ -1,0 +1,36 @@
+{
+  "name": "vlab-backend",
+  "version": "1.0.50",
+  "main": "src/index.ts",
+  "exports": {
+    "./server": "./src/services/server.ts"
+  },
+  "scripts": {
+    "dev": "bun run --watch src/index.ts | pino-pretty",
+    "build": "bun build src/index.ts --compile --minify --sourcemap --outfile ../build/vlab && cp -r migrations ../build/migrations",
+    "seed": "bun run src/seeder/index.ts | pino-pretty",
+    "drizzle:generate": "drizzle-kit generate",
+    "drizzle:migrate": "drizzle-kit migrate"
+  },
+  "dependencies": {
+    "@bogeychan/elysia-logger": "^0.1.10",
+    "@elysiajs/cron": "^1.4.1",
+    "@elysiajs/openapi": "^1.4.11",
+    "@elysiajs/static": "^1.4.7",
+    "dotenv": "^17.2.3",
+    "drizzle-orm": "^0.44.7",
+    "drizzle-typebox": "^0.3.3",
+    "elysia": "^1.4.16",
+    "elysia-helmet": "^3.0.0",
+    "pg": "^8.16.3",
+    "pg-native": "^3.5.2",
+    "pino": "^10.1.0",
+    "s3mini": "^0.7.0",
+    "typebox": "^1.0.55"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.15.6",
+    "bun-types": "latest",
+    "drizzle-kit": "^0.31.7"
+  }
+}
