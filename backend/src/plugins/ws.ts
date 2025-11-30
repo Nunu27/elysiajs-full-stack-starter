@@ -338,7 +338,7 @@ export default <const Events extends readonly WSEvent<any, any, any>[]>(
 	return createRouter().ws("/ws", {
 		body: typedBodySchema,
 		async message(ws, payload) {
-			if (!ws.data.session) {
+			if (!ws.data.session.data) {
 				ws.send({ error: "Unauthorized" });
 				ws.close();
 
@@ -353,7 +353,7 @@ export default <const Events extends readonly WSEvent<any, any, any>[]>(
 				return;
 			}
 
-			const session = ws.data.session;
+			const session = ws.data.session.data;
 			if (event.private && !event.private.includes(session.role)) {
 				ws.send({ error: "Forbidden" });
 				return;

@@ -5,32 +5,14 @@ export default createRouter().get(
 	"/me",
 	async ({ session, db, status }) => {
 		const user = await db.query.users.findFirst({
-			where: (user, { eq }) => eq(user.id, session.id),
-			columns: { passwordHash: false },
-			with: {
-				lecturer: {
-					columns: { nip: true }
-				},
-				student: {
-					columns: { nrp: true, degreeLevel: true, year: true },
-					with: {
-						studyProgram: {
-							columns: { id: true, name: true }
-						}
-					}
-				}
-			}
+			where: (user, { eq }) => eq(user.id, session.data.id),
+			columns: { passwordHash: false }
 		});
 
 		if (!user) return status(404, failure({ message: "User not found" }));
-		const { lecturer, student, ...rest } = user;
 
 		return success({
-			data: {
-				...rest,
-				...lecturer,
-				...student
-			}
+			data: user
 		});
 	},
 	{

@@ -6,9 +6,11 @@ import { ChangePasswordRequest } from "./schema";
 
 export default createRouter().post(
 	"/change-password",
-	async ({ session, body, status, db, redis }) => {
+	async ({ session, body, status, db }) => {
+		const userId = session.data.id;
+
 		const user = await db.query.users.findFirst({
-			where: (user, { eq }) => eq(user.id, session.id),
+			where: (user, { eq }) => eq(user.id, userId),
 			columns: { passwordHash: true }
 		});
 
@@ -25,8 +27,8 @@ export default createRouter().post(
 			await db
 				.update(users)
 				.set({ passwordHash: user.passwordHash })
-				.where(eq(users.id, session.id));
-			await redis.del(session.id);
+				.where(eq(users.id, userId));
+
 			return success({ message: "Password changed successfully" });
 		} else {
 			return status(400, failure({ message: "Old password is incorrect" }));

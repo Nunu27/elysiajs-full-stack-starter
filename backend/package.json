@@ -1,5 +1,5 @@
 {
-  "name": "vlab-backend",
+  "name": "app-backend",
   "version": "1.0.50",
   "main": "src/index.ts",
   "exports": {

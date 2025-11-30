@@ -10,7 +10,7 @@ const PREFIX = "cache:";
 const buildCacheKey = (
 	key: string | undefined,
 	personalized: boolean = false,
-	ctx: { session?: Session; key?: string }
+	ctx: { session: { data: Session | null }; key?: string }
 ) => {
 	if (!ctx.key && !key) {
 		logger.warn("No cacheKey found in context.");
@@ -20,12 +20,12 @@ const buildCacheKey = (
 	key = PREFIX + (ctx.key ?? key);
 
 	if (personalized) {
-		if (!ctx.session) {
+		if (!ctx.session.data) {
 			logger.warn("No session found in context.");
 			return;
 		}
 
-		key += `:${ctx.session.id}`;
+		key += `:${ctx.session.data.id}`;
 	}
 
 	return key;
@@ -47,7 +47,10 @@ export const clearCache = async () => {
 };
 
 export default new Elysia()
-	.resolve(() => ({}) as { cacheKey?: string; session?: Session })
+	.resolve(
+		{ as: "global" },
+		() => ({}) as { cacheKey?: string; session: { data: Session | null } }
+	)
 	.macro({
 		cached(options: CacheOptions | boolean) {
 			if (options === false) return;

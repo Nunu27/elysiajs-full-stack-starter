@@ -1,5 +1,5 @@
 {
-  "name": "vlab",
+  "name": "app",
   "module": "index.ts",
   "type": "module",
   "private": true,
@@ -11,8 +11,8 @@
     "dev": "bun frontend dev & bun backend dev",
     "build": "bun frontend build && bun backend build",
     "lint": "bun lint",
-    "frontend": "bun run --filter vlab-frontend",
-    "backend": "bun run --filter vlab-backend"
+    "frontend": "bun run --filter app-frontend",
+    "backend": "bun run --filter app-backend"
   },
   "devDependencies": {},
   "peerDependencies": {},
